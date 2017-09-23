@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1611" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dqb-UZ-bge">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--My To-Dos-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="sample_to_do" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +17,93 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Dj-2r-F6q">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4Dj-2r-F6q" secondAttribute="bottom" id="8eU-E1-X7U"/>
+                            <constraint firstItem="4Dj-2r-F6q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Cv4-8z-lJq"/>
+                            <constraint firstItem="4Dj-2r-F6q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EOJ-ep-tJ2"/>
+                            <constraint firstAttribute="trailing" secondItem="4Dj-2r-F6q" secondAttribute="trailing" id="dR7-cL-YEW"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="My To-Dos" id="H74-xB-wjS">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HcV-0c-W05">
+                            <connections>
+                                <action selector="addNewToDoButtonTapped:" destination="BYZ-38-t0r" id="zW7-hv-Rea"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="4Dj-2r-F6q" id="QVg-ch-qeJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1420" y="-546"/>
+        </scene>
+        <!--Add New To-Do-->
+        <scene sceneID="Bhz-ru-WSo">
+            <objects>
+                <viewController storyboardIdentifier="AddNewToDoViewController" id="JzF-ZM-fD3" customClass="AddNewToDoViewController" customModule="sample_to_do" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a7C-Ev-z2M"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Aa-af-ApJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RfQ-Zl-TNg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New To-Do" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IKJ-25-H9b">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="IKJ-25-H9b" secondAttribute="trailing" constant="30" id="0zm-Re-GPx"/>
+                            <constraint firstItem="IKJ-25-H9b" firstAttribute="top" secondItem="a7C-Ev-z2M" secondAttribute="bottom" constant="50" id="2to-w8-R4g"/>
+                            <constraint firstItem="IKJ-25-H9b" firstAttribute="leading" secondItem="RfQ-Zl-TNg" secondAttribute="leading" constant="30" id="xuA-Zx-hfw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add New To-Do" id="Igk-RF-sWF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="AYW-bZ-OFX">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="JzF-ZM-fD3" id="0bS-gT-6VN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="addNewToDoTextField" destination="IKJ-25-H9b" id="RxV-TL-hhH"/>
+                        <outlet property="doneButton" destination="AYW-bZ-OFX" id="uST-LE-oVX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xFH-pE-wCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2168.8000000000002" y="-546.47676161919048"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CLQ-wk-JAS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dqb-UZ-bge" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EXZ-p9-XNB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ipt-rQ-QGt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUr-3F-gnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="528.79999999999995" y="-545.57721139430294"/>
         </scene>
     </scenes>
 </document>

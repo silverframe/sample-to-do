@@ -88,4 +88,12 @@ extension ViewController: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return isEditing
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        toDos.swapAt(destinationIndexPath.row, sourceIndexPath.row)
+    }
+    
 }

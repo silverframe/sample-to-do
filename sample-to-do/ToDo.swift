@@ -12,6 +12,8 @@ class ToDo {
     
     var name: String
     
+    var done: Bool = false
+    
     init(name: String) {
         self.name = name
     }

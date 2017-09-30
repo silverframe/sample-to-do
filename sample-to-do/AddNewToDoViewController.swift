@@ -10,16 +10,20 @@ import UIKit
 
 class AddNewToDoViewController: UIViewController {
     
-    lazy var viewModel: AddNewToDoViewModel = {
-        return AddNewToDoViewModel()
+    lazy var dataManager: ToDoDataManager = {
+        return ToDoDataManager()
     }()
+    
+    func appendNewToDo(toDo: ToDo){
+        dataManager.appendNewToDo(toDo: toDo)
+    }
 
     @IBOutlet weak var addNewToDoTextField: UITextField!
     
     @IBAction func doneButtonTapped(_ sender: AnyObject) {
         if let toDo = addNewToDoTextField.text {
             let newToDo = ToDo(name: toDo)
-            viewModel.appendNewToDo(toDo: newToDo)
+            appendNewToDo(toDo: newToDo)
             _ = self.navigationController?.popViewController(animated: true)
         }
     }

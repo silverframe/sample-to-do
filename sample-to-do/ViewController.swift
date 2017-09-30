@@ -10,9 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var viewModel: ViewModel = {
-        return ViewModel()
+    lazy var dataManager: ToDoDataManager = {
+        return ToDoDataManager()
     }()
+    
+    var toDos: [ToDo] {
+        set {
+            dataManager.toDos = newValue
+        }
+        
+        get {
+            return dataManager.toDos
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,13 +55,13 @@ extension ViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoTableViewCell") as? ToDoTableViewCell else {
             return UITableViewCell()
         }
-        cell.toDoLabel.text = viewModel.toDos[indexPath.row].name
+        cell.toDoLabel.text = toDos[indexPath.row].name
         
         return cell 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.toDos.count
+        return toDos.count
     }
     
 }

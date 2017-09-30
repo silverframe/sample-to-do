@@ -56,6 +56,7 @@ extension ViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.toDoLabel.text = toDos[indexPath.row].name
+        cell.toDoImageView.backgroundColor = toDos[indexPath.row].done ? UIColor.red : UIColor.gray
         
         return cell 
     }
@@ -69,7 +70,9 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         return
+        toDos[indexPath.row].done = !toDos[indexPath.row].done
+        self.tableView.reloadData()
+        return
     }
     
     

@@ -161,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				6223D4181F7F4BBE0061FD83 /* Storyboards */,
-				6223D4131F7F4B2D0061FD83 /* Models */,
 				6223D4191F7F4BDC0061FD83 /* Views */,
+				6223D4131F7F4B2D0061FD83 /* Models */,
 				6223D4171F7F4BA80061FD83 /* DataStores */,
 				6223D4161F7F4B900061FD83 /* DataManagers */,
 				6223D4141F7F4B5C0061FD83 /* ViewControllers */,
@@ -490,7 +490,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sseah.sample-to-do";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -503,7 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sseah.sample-to-do";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

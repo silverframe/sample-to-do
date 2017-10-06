@@ -9,20 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    lazy var dataManager: ToDoDataManager = {
-        return ToDoDataManager()
-    }()
-    
-    var toDos: [ToDo] {
-        set {
-            dataManager.toDos = newValue
-        }
-        
-        get {
-            return dataManager.toDos
-        }
-    }
+
+    var todoItems: [String] = [String]()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,14 +26,32 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         let nib = UINib(nibName: "ToDoTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ToDoTableViewCell")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        self.navigationItem.leftBarButtonItem = editButtonItem
+        self.navigationItem.rightBarButtonItem = editButtonItem
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blue
+        
+        todoItems.append("Feed the dog")
+        todoItems.append("Marinade chicken")
+        todoItems.append("Wash clothes")
+        todoItems.append("Pay telco bill")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
+    }
+    
+    @IBAction func unwindToViewController(segue:UIStoryboardSegue) {
+        if segue.identifier == "unwindSegue" {
+            guard let vc = segue.source as? AddNewToDoViewController, let todo = vc.addNewToDoTextField.text else {
+                return
+                
+            }
+            todoItems.append(todo)
+            tableView.reloadData()
+        }
     }
 
 }
@@ -53,17 +59,15 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoTableViewCell") as? ToDoTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell") else {
             return UITableViewCell()
         }
-        cell.toDoLabel.text = toDos[indexPath.row].name
-        cell.toDoImageView.backgroundColor = toDos[indexPath.row].done ? UIColor.red : UIColor.gray
-        
+        cell.textLabel?.text = todoItems[indexPath.row]
         return cell 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDos.count
+        return todoItems.count
     }
     
 }
@@ -76,14 +80,20 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        toDos[indexPath.row].done = !toDos[indexPath.row].done
-        self.tableView.reloadData()
-        return
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        cell.contentView.backgroundColor = UIColor.yellow
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor.white
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            toDos.remove(at: indexPath.row)
+            todoItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -93,7 +103,17 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        toDos.swapAt(destinationIndexPath.row, sourceIndexPath.row)
+        let sourceItemIndexpath: Int = sourceIndexPath.row
+        let destinationItemIndexpath: Int = destinationIndexPath.row
+        let toDoItem = todoItems[sourceItemIndexpath]
+        
+        if sourceItemIndexpath != destinationItemIndexpath {
+            todoItems.swapAt(destinationIndexPath.row, sourceIndexPath.row)
+        } else {
+            todoItems.insert(toDoItem, at: destinationItemIndexpath)
+            todoItems.remove(at: sourceItemIndexpath)
+        }
+        
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var todoItems: [String] = [String]()
 
@@ -16,14 +16,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         
-        let nib = UINib(nibName: "ToDoTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "ToDoTableViewCell")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = editButtonItem
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blue
         
         todoItems.append("Feed the dog")
         todoItems.append("Marinade chicken")
@@ -41,30 +36,32 @@ class ViewController: UIViewController {
                 return
                 
             }
+            
+            let newTodo = todo.trimmingCharacters(in: .whitespacesAndNewlines)
+            // validation
+            if newTodo.count == 0 {
+                return
+            }
             todoItems.append(todo)
             tableView.reloadData()
         }
     }
-
-}
-
-extension ViewController: UITableViewDataSource {
+    
+    // MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell") else {
             return UITableViewCell()
         }
         cell.textLabel?.text = todoItems[indexPath.row]
-        return cell 
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoItems.count
     }
     
-}
-
-extension ViewController: UITableViewDelegate {
+    // MARK: UITableViewDelegate
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -107,5 +104,4 @@ extension ViewController: UITableViewDelegate {
         }
         
     }
-    
 }

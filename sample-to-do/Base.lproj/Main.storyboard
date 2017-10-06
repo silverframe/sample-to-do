@@ -34,6 +34,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="XOh-v7-H8S"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="F29-xk-HG6"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtF-Fs-fPv">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -98,6 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add New To-Do" id="Igk-RF-sWF">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="PBp-9Y-19B">
+                            <color key="tintColor" red="0.0" green="0.69019607839999997" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="taz-jh-7wv" kind="unwind" identifier="unwindSegue" unwindAction="unwindToViewControllerWithSegue:" id="wdn-iq-nKE"/>
                             </connections>
@@ -132,4 +137,5 @@
             <point key="canvasLocation" x="528.79999999999995" y="-545.57721139430294"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.69019607839999997" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

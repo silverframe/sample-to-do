@@ -14,14 +14,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func addNewToDoButtonTapped(_ sender: AnyObject) {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddNewToDoViewController") as? AddNewToDoViewController else {
-            return
-        }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
